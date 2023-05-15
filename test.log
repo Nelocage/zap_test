@@ -1,0 +1,135 @@
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mDEBUG\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:17","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34mINFO\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:18","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31mERROR\u001b[0m","ts":"2023-05-15 14:48:15","caller":"zap_test/main.go:19","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:53:00	[35mDEBUG[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:53:00	[34mINFO[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:53:00	[31mERROR[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+{"level":"\u001b[35mdebug\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:16","msg":"查询用户信息开始 id:1"}
+{"level":"\u001b[34minfo\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:17","msg":"查询用户信息成功 name:zhangSan age:20"}
+{"level":"\u001b[31merror\u001b[0m","ts":"2023-05-15 14:56:58","caller":"zap_test/main.go:18","msg":"查询用户信息失败 error:未该查询到该用户信息"}
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 14:57:30	[35mdebug[0m	zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 14:57:30	[34minfo[0m	zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 14:57:30	[31merror[0m	zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
+2023-05-15 15:03:14	[35mdebug[0m	C:/Users/nelocage/Desktop/zap_test/main.go:16	查询用户信息开始 id:1
+2023-05-15 15:03:14	[34minfo[0m	C:/Users/nelocage/Desktop/zap_test/main.go:17	查询用户信息成功 name:zhangSan age:20
+2023-05-15 15:03:14	[31merror[0m	C:/Users/nelocage/Desktop/zap_test/main.go:18	查询用户信息失败 error:未该查询到该用户信息
