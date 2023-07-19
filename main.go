@@ -45,7 +45,6 @@ func main() {
 	//	fmt.Println("自增ID", id.Hex())
 	//}
 
-	//result := model.GetAllModuleList()
 	//model.GetModuleDetail("车蓬主体结构（双车位）")
 	//model.PassTest()
 	//model.InitData()
@@ -59,6 +58,7 @@ func main() {
 	//	"6465ede666f25181aa26d65d",
 	//}
 	//fmt.Println(model.QueryIdParentPath(idList))
+
 	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
@@ -91,7 +91,6 @@ func main() {
 	if err := http.ListenAndServe(":5555", nil); err != nil {
 		panic(err)
 	}
-	//fmt.Println("---------------------------------")
 }
 func InitLogger() {
 	writeSyncer := getLogWriter()

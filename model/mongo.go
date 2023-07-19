@@ -3,11 +3,11 @@ package model
 import (
 	"context"
 	"fmt"
-	"github.com/jinzhu/copier"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"sort"
 	"zap_test/store"
 )
 
@@ -33,53 +33,12 @@ type ComponentResponse struct {
 	ImageUrl    string                 `bson:"image_url" json:"image_url"`         //组件的图片
 	CheckRules  map[string]interface{} `bson:"check_rules" json:"check_rules"`     //选择规则
 	ParentID    *primitive.ObjectID    `bson:"parent_id,omitempty" json:"-"`       //父组件的id
-	Children    []Component            `bson:"children,omitempty" json:"children"` //孩子
+	Children    []ComponentResponse    `bson:"children,omitempty" json:"children"` //孩子
+	CreatedAt   int64                  `bson:"created_at" json:"created_at"`       //添加时间
 }
 
 type FindByModuleName struct {
 	Name string `bson:"name"`
-}
-
-func GetAllModuleList() []*Component {
-	// 查询多个
-	// 将选项传递给Find()
-	findOptions := options.Find()
-	//findOptions.SetLimit(2)
-
-	client := store.GetMgoCli()
-	var results []*Component
-	collection := client.Database("topcloud").Collection("components")
-	// 把bson.D{{}}作为一个filter来匹配所有文档
-	cur, err := collection.Find(context.TODO(), bson.D{{}}, findOptions)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	// 查找多个文档返回一个光标
-	// 遍历游标允许我们一次解码一个文档
-	for cur.Next(context.TODO()) {
-		// 创建一个值，将单个文档解码为该值
-		var elem Component
-		err := cur.Decode(&elem)
-		if err != nil {
-			fmt.Println(err)
-		}
-		results = append(results, &elem)
-		fmt.Println(elem.ID.Hex())
-	}
-
-	if err := cur.Err(); err != nil {
-		fmt.Println(err)
-	}
-	// 完成后关闭游标
-	cur.Close(context.TODO())
-
-	var resultsResponse []ComponentResponse
-	copier.Copy(&resultsResponse, results)
-
-	fmt.Printf("Found multiple documents (array of pointers): %#v\n", results)
-	return results
-
 }
 
 func GetModuleDetail(moduleName string) {
@@ -105,22 +64,143 @@ func reverse(s []string) {
 
 func GetAllModuleListV2() []ComponentResponse {
 	client := store.GetMgoCli()
-	collection := client.Database("topcloud").Collection("components_new")
-	// 构造聚合管道
+	collection := client.Database("topcloud").Collection("components")
 	pipeline := bson.A{
-		bson.M{"$match": bson.M{"parent_id": bson.M{"$exists": false}}}, // 查询根节点
-		bson.M{
-			"$graphLookup": bson.M{
-				"from":             "components",
-				"startWith":        "$_id",
-				"connectFromField": "_id",
-				"connectToField":   "parent_id",
-				"as":               "children",
-			},
+		bson.D{
+			{"$match", bson.D{
+				{"parent_id", nil},
+			}},
+		},
+		bson.D{
+			{"$graphLookup", bson.D{
+				{"from", "components"},
+				{"startWith", "$_id"},
+				{"connectFromField", "_id"},
+				{"connectToField", "parent_id"},
+				{"depthField", "level"},
+				{"as", "children"},
+			}},
+		},
+		bson.D{
+			{"$unwind", bson.D{
+				{"path", "$children"},
+				{"preserveNullAndEmptyArrays", true},
+			}},
+		},
+		bson.D{
+			{"$sort", bson.D{
+				{"children.level", -1},
+			}},
+		},
+		bson.D{
+			{"$group", bson.D{
+				{"_id", "$_id"},
+				{"parent_id", bson.D{
+					{"$first", "$parent_id"},
+				}},
+				{"name", bson.D{
+					{"$first", "$name"},
+				}},
+				{"price", bson.D{
+					{"$first", "$price"},
+				}},
+				{"check_rules", bson.D{
+					{"$first", "$check_rules"},
+				}},
+				{"image_url", bson.D{
+					{"$first", "$image_url"},
+				}},
+				{"description", bson.D{
+					{"$first", "$description"},
+				}},
+				{"created_at", bson.D{
+					{"$first", "$created_at"},
+				}},
+				{"children", bson.D{
+					{"$push", "$children"},
+				}},
+			}},
+		},
+		bson.D{
+			{"$addFields", bson.D{
+				{"children", bson.D{
+					{"$reduce", bson.D{
+						{"input", "$children"},
+						{"initialValue", bson.D{
+							{"level", -1},
+							{"presentChild", bson.A{}},
+							{"prevChild", bson.A{}},
+						}},
+						{"in", bson.D{
+							{"$let", bson.D{
+								{"vars", bson.D{
+									{"prev", bson.D{
+										{"$cond", bson.A{
+											bson.D{
+												{"$eq", bson.A{
+													"$$value.level",
+													"$$this.level",
+												}},
+											},
+											"$$value.prevChild",
+											"$$value.presentChild",
+										}},
+									}},
+									{"current", bson.D{
+										{"$cond", bson.A{
+											bson.D{
+												{"$eq", bson.A{
+													"$$value.level",
+													"$$this.level",
+												}},
+											},
+											"$$value.presentChild",
+											bson.A{},
+										}},
+									}},
+								}},
+								{"in", bson.D{
+									{"level", "$$this.level"},
+									{"prevChild", "$$prev"},
+									{"presentChild", bson.D{
+										{"$concatArrays", bson.A{
+											"$$current",
+											bson.A{
+												bson.D{
+													{"$mergeObjects", bson.A{
+														"$$this",
+														bson.D{
+															{"children", bson.D{
+																{"$filter", bson.D{
+																	{"input", "$$prev"},
+																	{"as", "e"},
+																	{"cond", bson.D{
+																		{"$eq", bson.A{
+																			"$$e.parent_id",
+																			"$$this._id",
+																		}},
+																	}},
+																}},
+															}},
+														},
+													}},
+												},
+											},
+										}},
+									}},
+								}},
+							}},
+						}},
+					}},
+				}},
+			}},
+		},
+		bson.D{
+			{"$addFields", bson.D{
+				{"children", "$children.presentChild"},
+			}},
 		},
 	}
-
-	// 执行聚合操作，获取结果
 	cursor, err := collection.Aggregate(context.Background(), pipeline)
 	if err != nil {
 		panic(err)
@@ -130,17 +210,17 @@ func GetAllModuleListV2() []ComponentResponse {
 	if err = cursor.All(context.Background(), &result); err != nil {
 		panic(err)
 	}
-
-	// 输出结果
-	//for _, item := range result {
-	//	fmt.Printf("ID: %d, Name: %s, Children: %v\n", item.ID, item.Name, item.Children)
-	//}
-
-	// 关闭连接
 	err = client.Disconnect(context.Background())
 	if err != nil {
 		panic(err)
 	}
+	sort.SliceStable(result, func(i, j int) bool {
+		if result[i].CreatedAt < result[j].CreatedAt {
+			return true
+		}
+		return false
+	})
+
 	return result
 }
 
@@ -208,8 +288,27 @@ func InitData() {
 	defer client.Disconnect(context.Background())
 
 	// 获取组件集合
-	col := client.Database("topcloud").Collection("components_new")
+	col := client.Database("topcloud").Collection("components")
 	// 插入测试数据
+
+	rule0 := make(map[string]interface{})
+	rule0["radio_or_checkbox"] = "multi" //该字段只能赋值为single multi
+	component0 := Component{
+		Name:        "个性化配置",
+		Price:       0,
+		CreatedAt:   1684399050000,
+		UpdatedAt:   1684399050000,
+		DeletedAt:   0,
+		ImageUrl:    "",
+		CheckRules:  rule0,
+		Description: "",
+		ParentID:    nil,
+	}
+	res, err := col.InsertOne(context.Background(), component0)
+	componentID0 := res.InsertedID.(primitive.ObjectID)
+	if err != nil {
+		panic(err)
+	}
 	rule1 := make(map[string]interface{})
 	rule1["radio_or_checkbox"] = "single" //该字段只能赋值为single multi
 	component1 := Component{
@@ -223,11 +322,11 @@ func InitData() {
 		Description: "含钢结构与铝型材",
 		ParentID:    nil,
 	}
-	res, err := col.InsertOne(context.Background(), component1)
+	res, err = col.InsertOne(context.Background(), component1)
+	componentID1 := res.InsertedID.(primitive.ObjectID)
 	if err != nil {
 		panic(err)
 	}
-	//componentID1 := res.InsertedID.(primitive.ObjectID)
 
 	rule2 := make(map[string]interface{})
 	rule2["radio_or_checkbox"] = "single" //该字段只能赋值为single multi
@@ -240,7 +339,7 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule2,
 		Description: "含钢结构与铝型材",
-		ParentID:    nil,
+		ParentID:    &componentID1,
 	}
 	res, err = col.InsertOne(context.Background(), component2)
 	if err != nil {
@@ -267,21 +366,6 @@ func InitData() {
 	}
 	componentID3 := res.InsertedID.(primitive.ObjectID)
 
-	component4 := Component{
-		Name:        "7KW",
-		Price:       1350,
-		CreatedAt:   1684399050000,
-		UpdatedAt:   1684399050000,
-		DeletedAt:   0,
-		ImageUrl:    "",
-		Description: "",
-		ParentID:    &componentID3,
-	}
-	res, err = col.InsertOne(context.Background(), component4)
-	if err != nil {
-		panic(err)
-	}
-
 	rule5 := make(map[string]interface{})
 	rule5["radio_or_checkbox"] = "single" //该字段只能赋值为single multi
 	component5 := Component{
@@ -293,26 +377,10 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule5,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID3,
 	}
 	res, err = col.InsertOne(context.Background(), component5)
-	componentID5 := res.InsertedID.(primitive.ObjectID)
-	if err != nil {
-		panic(err)
-	}
-
-	component6 := Component{
-		Name:        "7KW",
-		Price:       2350,
-		CreatedAt:   1684399050000,
-		UpdatedAt:   1684399050000,
-		DeletedAt:   0,
-		ImageUrl:    "",
-		Description: "",
-		ParentID:    &componentID5,
-	}
-	res, err = col.InsertOne(context.Background(), component6)
-
+	//componentID5 := res.InsertedID.(primitive.ObjectID)
 	if err != nil {
 		panic(err)
 	}
@@ -328,26 +396,10 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule7,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID3,
 	}
 	res, err = col.InsertOne(context.Background(), component7)
-	componentID7 := res.InsertedID.(primitive.ObjectID)
-	if err != nil {
-		panic(err)
-	}
-
-	component8 := Component{
-		Name:        "60kW",
-		Price:       23360,
-		CreatedAt:   1684399050000,
-		UpdatedAt:   1684399050000,
-		DeletedAt:   0,
-		Description: "",
-		ImageUrl:    "",
-		ParentID:    &componentID7,
-	}
-	res, err = col.InsertOne(context.Background(), component8)
-
+	//componentID7 := res.InsertedID.(primitive.ObjectID)
 	if err != nil {
 		panic(err)
 	}
@@ -363,27 +415,10 @@ func InitData() {
 		Description: "",
 		ImageUrl:    "",
 		CheckRules:  rule9,
-		ParentID:    nil,
+		ParentID:    &componentID3,
 	}
 	res, err = col.InsertOne(context.Background(), component9)
-	componentID9 := res.InsertedID.(primitive.ObjectID)
-	if err != nil {
-		panic(err)
-	}
-
-	component10 := Component{
-		Name:        "120kW",
-		Price:       36800,
-		CreatedAt:   1684399050000,
-		UpdatedAt:   1684399050000,
-		DeletedAt:   0,
-		Description: "",
-		ImageUrl:    "",
-
-		ParentID: &componentID9,
-	}
-	res, err = col.InsertOne(context.Background(), component10)
-
+	//componentID9 := res.InsertedID.(primitive.ObjectID)
 	if err != nil {
 		panic(err)
 	}
@@ -421,23 +456,7 @@ func InitData() {
 		ParentID:    nil,
 	}
 	res, err = col.InsertOne(context.Background(), component12)
-	componentID12 := res.InsertedID.(primitive.ObjectID)
-	if err != nil {
-		panic(err)
-	}
-
-	component13 := Component{
-		Name:        "8KW 20度电",
-		Price:       86000,
-		CreatedAt:   1684399050000,
-		UpdatedAt:   1684399050000,
-		DeletedAt:   0,
-		Description: "",
-		ImageUrl:    "",
-		ParentID:    &componentID12,
-	}
-	res, err = col.InsertOne(context.Background(), component13)
-
+	//componentID12 := res.InsertedID.(primitive.ObjectID)
 	if err != nil {
 		panic(err)
 	}
@@ -453,7 +472,7 @@ func InitData() {
 		Description: "",
 		ImageUrl:    "",
 		CheckRules:  rule14,
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component14)
 
@@ -472,7 +491,7 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule15,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component15)
 	componentID15 := res.InsertedID.(primitive.ObjectID)
@@ -506,7 +525,7 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule17,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component17)
 	componentID17 := res.InsertedID.(primitive.ObjectID)
@@ -540,7 +559,7 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule19,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component19)
 	componentID19 := res.InsertedID.(primitive.ObjectID)
@@ -575,7 +594,7 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule21,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component21)
 	if err != nil {
@@ -593,7 +612,7 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule22,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component22)
 	componentID22 := res.InsertedID.(primitive.ObjectID)
@@ -628,7 +647,7 @@ func InitData() {
 		ImageUrl:    "",
 		CheckRules:  rule24,
 		Description: "",
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component24)
 	if err != nil {
@@ -646,7 +665,7 @@ func InitData() {
 		Description: "",
 		ImageUrl:    "",
 		CheckRules:  rule25,
-		ParentID:    nil,
+		ParentID:    &componentID0,
 	}
 	res, err = col.InsertOne(context.Background(), component25)
 	componentID25 := res.InsertedID.(primitive.ObjectID)
